@@ -30,6 +30,7 @@ class SignIn extends React.Component {
         password: '',
       }); //clear the states after succeed
       console.log("You´re logged in!")
+
     } catch (error) {
       console.log(error)
     }
