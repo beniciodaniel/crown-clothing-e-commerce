@@ -19,16 +19,16 @@ const Header = ({ currentUser }) => (
       <Link className='option' to='/contact'>CONTACT</Link>
       {
         currentUser ?
-        <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+        (<div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>)
         :
-        <Link className='option' to='/signin'>SIGN IN</Link>
+        (<Link className='option' to='/signin'>SIGN IN</Link>)
       }
     </div>
   </div>
 )
 
-const mapStateToProps = (state) => ({ //state = top level rootreducer
-  currentUser: state.user.userReducer
+const mapStateToProps = state => ({ //state = top level rootreducer
+  currentUser: state.user.currentUser
 })
 
 export default connect(mapStateToProps)(Header); //transformando em HOC
