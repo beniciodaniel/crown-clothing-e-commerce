@@ -7,6 +7,8 @@ import { auth } from '../../firebase/firebase.utils';
 
 import './header.styles.scss';
 
+import { connect } from 'react-redux';
+
 const Header = ({ currentUser }) => (
   <div className="header">
     <Link to="/" className='logo-container'>
@@ -25,4 +27,8 @@ const Header = ({ currentUser }) => (
   </div>
 )
 
-export default Header;
+const mapStateToProps = (state) => ({ //state = top level rootreducer
+  currentUser: state.user.userReducer
+})
+
+export default connect(mapStateToProps)(Header); //transformando em HOC
