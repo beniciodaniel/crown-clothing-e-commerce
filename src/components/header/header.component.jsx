@@ -9,6 +9,9 @@ import './header.styles.scss';
 
 import { connect } from 'react-redux';
 
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
 const Header = ({ currentUser }) => (
   <div className="header">
     <Link to="/" className='logo-container'>
@@ -23,7 +26,9 @@ const Header = ({ currentUser }) => (
         :
         (<Link className='option' to='/signin'>SIGN IN</Link>)
       }
+      <CartIcon />
     </div>
+    <CartDropdown />
   </div>
 )
 
