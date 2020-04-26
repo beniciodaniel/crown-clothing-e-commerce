@@ -9,19 +9,37 @@ import { connect } from 'react-redux';
 
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 
-const CartDropdown = ({ cartItems }) => (
+import { createStructuredSelector } from 'reselect';
+
+import { withRouter } from 'react-router-dom';
+
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
+
+const CartDropdown = ({ cartItems, history, dispatch }) => ( //history coming from connect connection with withRouter //dispatch comes with the props automatically
   <div className="cart-dropdown">
-    <div className="cart-items">
-      {
-        cartItems.map(cartItem => (<CartItem key={cartItem.id} item={cartItem} />))
+    <div className="cart-items">    
+      {        
+        cartItems.length ? (
+        cartItems.map(cartItem => (
+          <CartItem key={cartItem.id} item={cartItem} />
+        ))
+        ) : (
+          <span className='empty-message'>Your cart is empty</span>
+        )
       }
     </div>
-    <CustomButton>GO TO CHECKOUT</CustomButton>
+    <CustomButton onClick={() => {
+      history.push('/checkout');
+      dispatch(toggleCartHidden())
+    }}>
+      GO TO CHECKOUT
+    </CustomButton>
   </div>
 )
 
-const mapStateToProps = (state) => ({
-  cartItems: selectCartItems(state)
+const mapStateToProps = createStructuredSelector ({
+  cartItems: selectCartItems
 })
 
-export default connect(mapStateToProps)(CartDropdown);
+export default withRouter(connect(mapStateToProps)(CartDropdown));
+//Since the withRouter wraps the connect, the props provided by withRouter (i.e. history, match etc.) will be available in the mapStateToProps function you pass to connect on the ownProps property. 
