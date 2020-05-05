@@ -8,6 +8,7 @@ import ShopPage from './pages/shop/shop.component';
 import CheckOutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sigin-up/sign-in-and-sigin-up.component';
+
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { connect } from 'react-redux';
@@ -35,9 +36,8 @@ class App extends React.Component {
           });
         });
       }
-      // if (!userAuth) {
-        setCurrentUser(userAuth) //currentUser: null
-      // }
+      
+      setCurrentUser(userAuth) //currentUser: null
     });
   }
 
@@ -66,7 +66,7 @@ const mapStateToProps = createStructuredSelector ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),  
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
