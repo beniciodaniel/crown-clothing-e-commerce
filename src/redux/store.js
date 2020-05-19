@@ -3,9 +3,8 @@ import logger from 'redux-logger'; //para debuggar
 import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
-import { fetchCollectionsStart } from './shop/shop.sagas'
-
 import rootReducer from './root-reducer';
+import rootSaga from './root-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
@@ -16,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));  //criando o mega Store com todos os states
 
-sagaMiddleware.run(fetchCollectionsStart)
+sagaMiddleware.run(rootSaga)
 
 const persistor = persistStore(store);
 
